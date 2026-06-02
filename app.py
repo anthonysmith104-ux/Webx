@@ -3,9 +3,9 @@ Lathrop & Co. — prototype site, served via Streamlit.
 
 Repo layout for deployment:
     your-repo/
-    ├── app.py                          <- this file
-    ├── contractor-site-prototype.html  <- the prototype
-    └── requirements.txt                <- just: streamlit
+    ├── app.py                  <- this file
+    ├── asgard-site.html        <- the prototype
+    └── requirements.txt        <- just: streamlit
 
 The HTML is rendered inside a component iframe (not st.markdown) because
 st.markdown strips <script> tags, which would kill the quote form,
@@ -17,8 +17,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="Lathrop & Co. — Painting · Finishing · Remodeling",
-    page_icon="🎨",
+    page_title="Asgard Construction LLC — Painting · Finishing · Remodeling",
+    page_icon="🔨",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -53,7 +53,7 @@ st.markdown(
 )
 
 # --- Load and render the prototype ---
-html_path = Path(__file__).parent / "contractor-site-prototype.html"
+html_path = Path(__file__).parent / "asgard-site.html"
 html = html_path.read_text(encoding="utf-8")
 
 # height is a fallback; the CSS above stretches it to the full viewport.
