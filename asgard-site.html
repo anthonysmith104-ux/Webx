@@ -503,10 +503,10 @@
       </div>
       <div class="admin-card" style="max-width:430px;margin:0 auto">
         <label>Email</label>
-        <input id="ownEmail" type="email" placeholder="owner@asgardconstruction.com">
+        <input id="ownEmail" type="email" placeholder="owner@asgardconstruction.com" onkeydown="if(event.key==='Enter'){event.preventDefault();asgSignIn();}">
         <label>Password</label>
-        <input id="ownPass" type="password" placeholder="enter demo password">
-        <button class="btn btn-primary" id="ownLoginBtn" style="width:100%;justify-content:center;margin-top:16px">Sign in</button>
+        <input id="ownPass" type="password" placeholder="enter demo password" onkeydown="if(event.key==='Enter'){event.preventDefault();asgSignIn();}">
+        <button class="btn btn-primary" id="ownLoginBtn" onclick="asgSignIn()" style="width:100%;justify-content:center;margin-top:16px">Sign in</button>
         <p id="ownErr" style="color:#a8331f;font-weight:600;font-size:13px;margin-top:12px;display:none">Use any email and the demo password: <b>asgard</b></p>
         <p style="font-size:12px;color:var(--ink-soft);margin-top:14px">Demo password: <b>asgard</b>. This is a UI prototype &mdash; real authentication requires a backend.</p>
       </div>
@@ -514,7 +514,7 @@
     <div id="ownerDash" style="display:none">
       <div class="dash-head">
         <div><div class="rule"></div><span class="eyebrow">Owner Portal</span><h2 style="text-transform:uppercase">Dashboard</h2></div>
-        <button class="btn btn-ghost" id="ownLogout">Sign out</button>
+        <button class="btn btn-ghost" id="ownLogout" onclick="asgSignOut()">Sign out</button>
       </div>
       <div class="dash-tabs">
         <button class="dash-tab on" data-tab="settings">Site Settings</button>
@@ -670,6 +670,24 @@
     document.getElementById('qType').value='';
   };
 
+  /* global, inline-wired sign in/out so it never depends on later script binding */
+  function asgSignIn(){
+    var p=(document.getElementById('ownPass').value||'').trim().toLowerCase();
+    if(p==='asgard'){
+      document.getElementById('ownErr').style.display='none';
+      document.getElementById('ownerLogin').style.display='none';
+      document.getElementById('ownerDash').style.display='block';
+      if(typeof window.__asgInit==='function'){ try{ window.__asgInit(); }catch(e){} }
+    } else {
+      document.getElementById('ownErr').style.display='block';
+    }
+  }
+  function asgSignOut(){
+    document.getElementById('ownerDash').style.display='none';
+    document.getElementById('ownerLogin').style.display='block';
+    var pw=document.getElementById('ownPass'); if(pw) pw.value='';
+  }
+
   /* ===================== OWNER PORTAL ===================== */
   (function(){
     // storage that persists when self-hosted, falls back to memory in sandboxed previews
@@ -693,25 +711,8 @@
     }
     renderSettings();
 
-    // login (demo password: asgard) — tolerant of spaces/case, Enter submits
-    function ownerTryLogin(){
-      var pass=(document.getElementById('ownPass').value||'').trim().toLowerCase();
-      if(pass==='asgard'){
-        document.getElementById('ownErr').style.display='none';
-        document.getElementById('ownerLogin').style.display='none';
-        document.getElementById('ownerDash').style.display='block';
-        initInvoice();
-      } else { document.getElementById('ownErr').style.display='block'; }
-    }
-    document.getElementById('ownLoginBtn').onclick=ownerTryLogin;
-    ['ownPass','ownEmail'].forEach(function(id){
-      document.getElementById(id).addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); ownerTryLogin(); } });
-    });
-    document.getElementById('ownLogout').onclick=function(){
-      document.getElementById('ownerDash').style.display='none';
-      document.getElementById('ownerLogin').style.display='block';
-      document.getElementById('ownPass').value='';
-    };
+    // expose invoice initializer so the global sign-in handler can call it
+    window.__asgInit = initInvoice;
 
     // sub-tabs
     document.querySelectorAll('.dash-tab').forEach(function(t){
