@@ -852,7 +852,9 @@
       doc.setFontSize(10); doc.setTextColor(gray[0],gray[1],gray[2]);
       totline('Subtotal', fmt(t.sub));
       totline('Tax ('+t.taxRate+'%)', fmt(t.tax));
-      doc.setDrawColor(gold[0],gold[1],gold[2]); doc.setLineWidth(0.6); doc.line(120,y-3,R,y-3);
+      y += 2;
+      doc.setDrawColor(gold[0],gold[1],gold[2]); doc.setLineWidth(0.6); doc.line(120,y,R,y);
+      y += 9;
       doc.setTextColor(ink[0],ink[1],ink[2]); doc.setFontSize(12); totline('TOTAL', fmt(t.total), true);
       var notes=document.getElementById('invNotes').value;
       if(notes){ y+=6; doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(150,150,150); doc.text('NOTES', M, y); y+=5;
