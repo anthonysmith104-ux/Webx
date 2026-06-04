@@ -693,14 +693,20 @@
     }
     renderSettings();
 
-    // login
-    document.getElementById('ownLoginBtn').onclick=function(){
-      if(document.getElementById('ownPass').value==='asgard'){
+    // login (demo password: asgard) — tolerant of spaces/case, Enter submits
+    function ownerTryLogin(){
+      var pass=(document.getElementById('ownPass').value||'').trim().toLowerCase();
+      if(pass==='asgard'){
+        document.getElementById('ownErr').style.display='none';
         document.getElementById('ownerLogin').style.display='none';
         document.getElementById('ownerDash').style.display='block';
         initInvoice();
       } else { document.getElementById('ownErr').style.display='block'; }
-    };
+    }
+    document.getElementById('ownLoginBtn').onclick=ownerTryLogin;
+    ['ownPass','ownEmail'].forEach(function(id){
+      document.getElementById(id).addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); ownerTryLogin(); } });
+    });
     document.getElementById('ownLogout').onclick=function(){
       document.getElementById('ownerDash').style.display='none';
       document.getElementById('ownerLogin').style.display='block';
