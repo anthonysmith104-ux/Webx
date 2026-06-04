@@ -218,7 +218,42 @@
     section{padding:64px 0}.estimator{gap:30px}
   }
   @media(max-width:560px){.gallery{grid-template-columns:1fr;grid-auto-rows:150px}.foot-grid{grid-template-columns:1fr}}
+
+  /* multi-view (each nav header = its own page) */
+  .view{display:none}
+  .view.active{display:block;min-height:calc(100vh - 80px);animation:fadev .45s ease}
+  @keyframes fadev{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .navlinks a.active{color:var(--gold)!important;opacity:1}
+
+  /* owner portal */
+  .admin-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px}
+  .admin-card label{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;color:var(--ink-soft)}
+  .admin-card input,.admin-card textarea{width:100%;padding:11px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bone);font-family:'Hanken Grotesk';font-size:15px;color:var(--ink)}
+  .admin-card input:focus,.admin-card textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+  .admin-card textarea{min-height:80px;resize:vertical}
+  .dash-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+  .dash-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+  .dash-tab{padding:11px 22px;border-radius:6px;border:1px solid var(--line);background:var(--bone);font-family:'Hanken Grotesk';font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:.2s}
+  .dash-tab.on{background:var(--ink);color:var(--gold-light);border-color:var(--ink)}
+  .toast{display:inline-block;margin-left:14px;color:var(--gold-deep);font-weight:700;font-size:13px}
+  .inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .li-head,.li-row{display:grid;grid-template-columns:1fr 70px 96px 100px 30px;gap:8px;align-items:center}
+  .li-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:6px 0}
+  .li-head span:nth-child(2),.li-head span:nth-child(3),.li-head span:nth-child(4){text-align:right}
+  .li-row{margin-bottom:8px}
+  .li-row input{padding:9px 11px;border-radius:7px;border:1px solid var(--line);background:var(--bone);font-family:'Hanken Grotesk';font-size:14px;width:100%}
+  .li-row .li-qty,.li-row .li-rate{text-align:right}
+  .li-row .amt{font-family:'Cinzel';font-weight:600;text-align:right;font-size:14px}
+  .li-del{border:0;background:none;color:#a8331f;font-size:20px;cursor:pointer;line-height:1}
+  .inv-foot{display:flex;gap:30px;flex-wrap:wrap;margin-top:20px}
+  .inv-tots{min-width:240px;margin-left:auto}
+  .tot{display:flex;justify-content:space-between;gap:30px;padding:6px 0;font-size:14px;color:var(--ink-soft)}
+  .tot span:last-child{color:var(--ink);font-weight:600}
+  .tot.grand{font-family:'Cinzel';font-size:19px;font-weight:700;color:var(--ink);border-top:2px solid var(--gold);margin-top:6px;padding-top:12px}
+  .tot input{padding:2px 4px;border:1px solid var(--line);border-radius:4px;font-family:'Hanken Grotesk';font-size:13px;text-align:right}
+  @media(max-width:680px){.inv-meta{grid-template-columns:1fr}.li-head{display:none}.li-row{grid-template-columns:1fr 1fr;gap:6px}.li-row .amt{grid-column:1/2}.li-del{grid-column:2/3;justify-self:end}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -252,10 +287,10 @@
 </header>
 
 <a id="top"></a>
-<section class="hero">
+<section class="hero view" id="home">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow reveal">General Contracting &middot; Twin Cities, MN</span>
+      <span class="eyebrow reveal">Painting &middot; Finishing &middot; Remodeling &middot; Twin Cities, MN</span>
       <h1 class="reveal h1">Built to last.<br><span class="gold-text">Built like Asgard.</span></h1>
       <p class="lede reveal h2">Painting, finishing, and full remodels for Twin Cities homeowners. Old-world craftsmanship, straight pricing, and a crew that treats your home like its own.</p>
       <div class="hero-cta reveal h3">
@@ -274,7 +309,7 @@
   </div>
 </section>
 
-<section id="services" class="alt">
+<section id="services" class="alt view">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
@@ -305,7 +340,7 @@
   </div>
 </section>
 
-<section id="process">
+<section id="process" class="view">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
@@ -321,7 +356,7 @@
   </div>
 </section>
 
-<section id="estimate" class="dark">
+<section id="estimate" class="dark view">
   <div class="wrap">
     <div class="estimator">
       <div class="reveal h1">
@@ -360,7 +395,7 @@
   </div>
 </section>
 
-<section id="work" class="alt">
+<section id="work" class="alt view">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
@@ -381,7 +416,7 @@
   </div>
 </section>
 
-<section id="reviews">
+<section id="reviews" class="view">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
@@ -396,7 +431,7 @@
   </div>
 </section>
 
-<section id="book" class="alt">
+<section id="book" class="alt view">
   <div class="wrap">
     <div class="duo">
       <div class="panel reveal h1">
@@ -435,7 +470,7 @@
   </div>
 </section>
 
-<section id="quote">
+<section id="quote" class="view">
   <div class="wrap" style="max-width:820px">
     <div class="section-head reveal" style="text-align:center;margin:0 auto 44px">
       <div class="rule center"></div>
@@ -456,6 +491,77 @@
   </div>
 </section>
 
+<section id="owner" class="view">
+  <div class="wrap" style="max-width:1000px">
+    <div id="ownerLogin">
+      <div class="section-head" style="text-align:center;margin:0 auto 30px">
+        <div class="rule center"></div>
+        <span class="eyebrow" style="display:inline-flex;justify-content:center">Owner Portal</span>
+        <h2>Sign in</h2>
+        <p>Business owners only &mdash; prototype login (not secure; see note).</p>
+      </div>
+      <div class="admin-card" style="max-width:430px;margin:0 auto">
+        <label>Email</label>
+        <input id="ownEmail" type="email" placeholder="owner@asgardconstruction.com">
+        <label>Password</label>
+        <input id="ownPass" type="password" placeholder="enter demo password">
+        <button class="btn btn-primary" id="ownLoginBtn" style="width:100%;justify-content:center;margin-top:16px">Sign in</button>
+        <p id="ownErr" style="color:#a8331f;font-weight:600;font-size:13px;margin-top:12px;display:none">Use any email and the demo password: <b>asgard</b></p>
+        <p style="font-size:12px;color:var(--ink-soft);margin-top:14px">Demo password: <b>asgard</b>. This is a UI prototype &mdash; real authentication requires a backend.</p>
+      </div>
+    </div>
+    <div id="ownerDash" style="display:none">
+      <div class="dash-head">
+        <div><div class="rule"></div><span class="eyebrow">Owner Portal</span><h2 style="text-transform:uppercase">Dashboard</h2></div>
+        <button class="btn btn-ghost" id="ownLogout">Sign out</button>
+      </div>
+      <div class="dash-tabs">
+        <button class="dash-tab on" data-tab="settings">Site Settings</button>
+        <button class="dash-tab" data-tab="invoice">Create Invoice</button>
+      </div>
+      <div class="dash-panel" id="tab-settings">
+        <div class="admin-card">
+          <h3 style="text-transform:uppercase;font-size:18px;margin-bottom:4px">Business details</h3>
+          <p style="color:var(--ink-soft);font-size:14px">These appear in the site footer and on your invoices. Changes update the site live.</p>
+          <label>Business name</label><input id="set_business">
+          <label>Phone</label><input id="set_phone">
+          <label>Email</label><input id="set_email">
+          <label>Address</label><input id="set_address">
+          <button class="btn btn-primary" id="saveSettings" style="margin-top:18px">Save changes</button>
+          <span class="toast" id="setToast" style="display:none">&#10003; Saved &mdash; site updated</span>
+        </div>
+      </div>
+      <div class="dash-panel" id="tab-invoice" style="display:none">
+        <div class="admin-card">
+          <div class="inv-meta">
+            <div><label>Bill to &mdash; client name</label><input id="invClient" placeholder="Client name"></div>
+            <div><label>Client email</label><input id="invClientEmail" type="email" placeholder="client@email.com"></div>
+            <div><label>Invoice #</label><input id="invNum" placeholder="INV-1001"></div>
+            <div><label>Date</label><input id="invDate" placeholder="6/4/2026"></div>
+          </div>
+          <label style="margin-top:18px">Line items</label>
+          <div class="li-head"><span>Description</span><span>Qty</span><span>Rate</span><span>Amount</span><span></span></div>
+          <div id="liBody"></div>
+          <button class="btn btn-ghost" id="addLine" style="margin-top:6px;padding:9px 16px;font-size:12px">+ Add line</button>
+          <div class="inv-foot">
+            <div style="flex:1;min-width:220px"><label>Notes</label><textarea id="invNotes" placeholder="Payment terms, thank-you note, etc."></textarea></div>
+            <div class="inv-tots">
+              <div class="tot"><span>Subtotal</span><span id="invSub">$0.00</span></div>
+              <div class="tot"><span>Tax (<input id="invTax" type="number" min="0" step="0.1" value="0" style="width:54px">%)</span><span id="invTaxAmt">$0.00</span></div>
+              <div class="tot grand"><span>Total</span><span id="invTotal">$0.00</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <button class="btn btn-primary" id="dlInvoice">Download PDF</button>
+            <button class="btn btn-dark" id="emailInvoice">Email to client</button>
+          </div>
+          <p style="font-size:12px;color:var(--ink-soft);margin-top:12px">Email opens a draft with the PDF downloaded to attach. Auto-send with the file attached needs a backend (e.g., your Streamlit + an email service).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -466,18 +572,47 @@
       </div>
       <div><h5>Explore</h5><ul><li><a href="#services">Services</a></li><li><a href="#work">Our Work</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#estimate">Get an Estimate</a></li></ul></div>
       <div><h5>Company</h5><ul><li><a href="#process">Process</a></li><li><a href="#book">Book a Visit</a></li><li><a href="#quote">Request a Quote</a></li><li><a href="#">Careers</a></li></ul></div>
-      <div><h5>Contact</h5><ul><li>Twin Cities, Minnesota</li><li><a href="tel:+16515550100">(651) 555-0100</a></li><li><a href="mailto:hello@asgardconstruction.com">hello@asgardconstruction.com</a></li><li>Mon&ndash;Fri &middot; 7:30 AM&ndash;5 PM</li></ul></div>
+      <div><h5>Contact</h5><ul><li id="ftAddress">Twin Cities, Minnesota</li><li><a id="ftPhone" href="tel:+16515550100">(651) 555-0100</a></li><li><a id="ftEmail" href="mailto:hello@asgardconstruction.com">hello@asgardconstruction.com</a></li><li>Mon&ndash;Fri &middot; 7:30 AM&ndash;5 PM</li></ul></div>
     </div>
     <div class="foot-bottom">
-      <span>&copy; 2026 Asgard Construction LLC. All rights reserved.</span>
-      <span>MN Lic. #000000 &middot; Built as a prototype</span>
+      <span id="ftCopy">&copy; 2026 Asgard Construction LLC. All rights reserved.</span>
+      <span>MN Lic. #000000 &middot; <a href="#owner" style="color:var(--gold)">Owner Login</a></span>
     </div>
   </div>
 </footer>
 
 <script>
   const nav=document.getElementById('nav');
-  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20));
+  nav.classList.add('scrolled');            // solid header on all pages
+
+  /* ---- simple client-side router: one view per nav header ---- */
+  const views = [...document.querySelectorAll('.view')];
+  const navAs = [...document.querySelectorAll('.navlinks a')];
+  function showView(id){
+    if(!document.getElementById(id)) id = 'home';
+    views.forEach(v=>{
+      const on = v.id === id;
+      v.classList.toggle('active', on);
+      if(on) v.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
+    });
+    navAs.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+    window.scrollTo(0,0);
+    if(history.replaceState) history.replaceState(null, '', '#'+id);
+  }
+  // any in-page link (nav, hero CTAs, footer, estimator) switches the view
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const t = a.getAttribute('href').slice(1);
+      if(t === '') return;                       // bare "#" placeholder
+      const id = (t === 'top') ? 'home' : t;
+      if(document.getElementById(id)){
+        e.preventDefault();
+        showView(id);
+        document.getElementById('navlinks').classList.remove('open');
+      }
+    });
+  });
+  showView((location.hash || '#home').slice(1));
   const links=document.getElementById('navlinks');
   document.getElementById('menuToggle').onclick=()=>links.classList.toggle('open');
   links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
@@ -533,6 +668,182 @@
     ['qName','qPhone','qEmail','qNotes'].forEach(i=>document.getElementById(i).value='');
     document.getElementById('qType').value='';
   };
+
+  /* ===================== OWNER PORTAL ===================== */
+  (function(){
+    // storage that persists when self-hosted, falls back to memory in sandboxed previews
+    var store = (function(){
+      try{ var k='__asg_t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
+        return { get:function(x){return localStorage.getItem(x);}, set:function(x,v){localStorage.setItem(x,v);} }; }
+      catch(e){ var m={}; return { get:function(x){return (x in m)?m[x]:null;}, set:function(x,v){m[x]=v;} }; }
+    })();
+
+    var settings = { business:'Asgard Construction LLC', phone:'(651) 555-0100',
+                     email:'hello@asgardconstruction.com', address:'Twin Cities, Minnesota' };
+    try{ var sv=store.get('asg_settings'); if(sv) settings=Object.assign(settings, JSON.parse(sv)); }catch(e){}
+
+    function telHref(p){ return 'tel:'+(p||'').replace(/[^0-9+]/g,''); }
+    function renderSettings(){
+      var a=document.getElementById('ftAddress'); if(a) a.textContent=settings.address;
+      var ph=document.getElementById('ftPhone'); if(ph){ ph.textContent=settings.phone; ph.href=telHref(settings.phone); }
+      var em=document.getElementById('ftEmail'); if(em){ em.textContent=settings.email; em.href='mailto:'+settings.email; }
+      var c=document.getElementById('ftCopy'); if(c) c.textContent='\u00A9 2026 '+settings.business+'. All rights reserved.';
+      ['business','phone','email','address'].forEach(function(k){ var el=document.getElementById('set_'+k); if(el) el.value=settings[k]; });
+    }
+    renderSettings();
+
+    // login
+    document.getElementById('ownLoginBtn').onclick=function(){
+      if(document.getElementById('ownPass').value==='asgard'){
+        document.getElementById('ownerLogin').style.display='none';
+        document.getElementById('ownerDash').style.display='block';
+        initInvoice();
+      } else { document.getElementById('ownErr').style.display='block'; }
+    };
+    document.getElementById('ownLogout').onclick=function(){
+      document.getElementById('ownerDash').style.display='none';
+      document.getElementById('ownerLogin').style.display='block';
+      document.getElementById('ownPass').value='';
+    };
+
+    // sub-tabs
+    document.querySelectorAll('.dash-tab').forEach(function(t){
+      t.onclick=function(){
+        document.querySelectorAll('.dash-tab').forEach(function(x){x.classList.remove('on');});
+        t.classList.add('on');
+        document.getElementById('tab-settings').style.display=(t.dataset.tab==='settings')?'block':'none';
+        document.getElementById('tab-invoice').style.display=(t.dataset.tab==='invoice')?'block':'none';
+      };
+    });
+
+    // save settings
+    document.getElementById('saveSettings').onclick=function(){
+      ['business','phone','email','address'].forEach(function(k){
+        var v=document.getElementById('set_'+k).value.trim(); if(v) settings[k]=v;
+      });
+      try{ store.set('asg_settings', JSON.stringify(settings)); }catch(e){}
+      renderSettings();
+      var to=document.getElementById('setToast'); to.style.display='inline-block';
+      setTimeout(function(){ to.style.display='none'; }, 2500);
+    };
+
+    // ----- invoice builder -----
+    function fmt(n){ return '$'+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    function readRows(){
+      return [].slice.call(document.querySelectorAll('#liBody .li-row')).map(function(r){
+        return { desc:r.querySelector('.li-desc').value,
+                 qty:parseFloat(r.querySelector('.li-qty').value)||0,
+                 rate:parseFloat(r.querySelector('.li-rate').value)||0 };
+      });
+    }
+    function renderRows(items){
+      var b=document.getElementById('liBody'); b.innerHTML='';
+      items.forEach(function(it,i){
+        var row=document.createElement('div'); row.className='li-row';
+        row.innerHTML='<input class="li-desc" placeholder="Description" value="'+String(it.desc||'').replace(/"/g,'&quot;')+'">'
+          +'<input class="li-qty" type="number" min="0" step="1" value="'+it.qty+'">'
+          +'<input class="li-rate" type="number" min="0" step="0.01" value="'+it.rate+'">'
+          +'<div class="amt">$0.00</div>'
+          +'<button class="li-del" title="Remove">\u00D7</button>';
+        b.appendChild(row);
+        row.querySelector('.li-del').onclick=function(){ var arr=readRows(); arr.splice(i,1); if(!arr.length) arr=[{desc:'',qty:1,rate:0}]; renderRows(arr); };
+        row.querySelectorAll('input').forEach(function(inp){ inp.addEventListener('input', compute); });
+      });
+      compute();
+    }
+    function compute(){
+      var sub=0;
+      [].slice.call(document.querySelectorAll('#liBody .li-row')).forEach(function(r){
+        var amt=(parseFloat(r.querySelector('.li-qty').value)||0)*(parseFloat(r.querySelector('.li-rate').value)||0);
+        sub+=amt; r.querySelector('.amt').textContent=fmt(amt);
+      });
+      var taxRate=parseFloat(document.getElementById('invTax').value)||0;
+      var tax=sub*taxRate/100, total=sub+tax;
+      document.getElementById('invSub').textContent=fmt(sub);
+      document.getElementById('invTaxAmt').textContent=fmt(tax);
+      document.getElementById('invTotal').textContent=fmt(total);
+      return { sub:sub, tax:tax, total:total, taxRate:taxRate };
+    }
+    function initInvoice(){
+      if(!document.getElementById('invNum').value){
+        var seq=parseInt(store.get('asg_invseq')||'1000',10)+1;
+        document.getElementById('invNum').value='INV-'+seq;
+      }
+      if(!document.getElementById('invDate').value){
+        var d=new Date(); document.getElementById('invDate').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+      }
+      if(!document.querySelector('#liBody .li-row')) renderRows([{desc:'',qty:1,rate:0}]);
+    }
+    document.getElementById('invTax').addEventListener('input', compute);
+    document.getElementById('addLine').onclick=function(){ var arr=readRows(); arr.push({desc:'',qty:1,rate:0}); renderRows(arr); };
+
+    function makePDF(){
+      var ns=window.jspdf||{}, JsPDF=ns.jsPDF;
+      if(!JsPDF){ alert('PDF library still loading \u2014 try again in a moment.'); return null; }
+      var doc=new JsPDF({unit:'mm',format:'a4'});
+      var gold=[195,148,51], ink=[18,18,17], gray=[90,90,90];
+      var M=18, R=192, y=20;
+      try{ var src=document.querySelector('.hero-logo img').src; doc.addImage(src,'PNG',M,y-4,20,26); }catch(e){}
+      doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(ink[0],ink[1],ink[2]);
+      doc.text(settings.business, R, y, {align:'right'});
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(gray[0],gray[1],gray[2]);
+      [settings.address,settings.phone,settings.email].filter(Boolean).forEach(function(t,i){ doc.text(String(t), R, y+6+i*5, {align:'right'}); });
+      y+=34;
+      doc.setDrawColor(gold[0],gold[1],gold[2]); doc.setLineWidth(0.8); doc.line(M,y,R,y); y+=11;
+      doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.setTextColor(ink[0],ink[1],ink[2]); doc.text('INVOICE', M, y);
+      doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(gray[0],gray[1],gray[2]);
+      doc.text('Invoice #: '+document.getElementById('invNum').value, R, y-5, {align:'right'});
+      doc.text('Date: '+document.getElementById('invDate').value, R, y, {align:'right'});
+      y+=12;
+      doc.setFontSize(8.5); doc.setTextColor(150,150,150); doc.text('BILL TO', M, y);
+      doc.setFontSize(11); doc.setTextColor(ink[0],ink[1],ink[2]); doc.text(document.getElementById('invClient').value||'-', M, y+6);
+      var ce=document.getElementById('invClientEmail').value;
+      if(ce){ doc.setFontSize(9.5); doc.setTextColor(gray[0],gray[1],gray[2]); doc.text(ce, M, y+11); }
+      y+=20;
+      doc.setFillColor(18,18,17); doc.rect(M,y,R-M,9,'F');
+      doc.setTextColor(240,221,154); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
+      doc.text('DESCRIPTION', M+3, y+6); doc.text('QTY',118,y+6,{align:'right'}); doc.text('RATE',150,y+6,{align:'right'}); doc.text('AMOUNT',R-3,y+6,{align:'right'});
+      y+=14;
+      doc.setFont('helvetica','normal'); doc.setTextColor(ink[0],ink[1],ink[2]); doc.setFontSize(10);
+      readRows().forEach(function(it){
+        if(y>262){ doc.addPage(); y=22; }
+        doc.text(String(it.desc||'-').substring(0,58), M+3, y);
+        doc.text(String(it.qty), 118, y, {align:'right'});
+        doc.text(fmt(it.rate), 150, y, {align:'right'});
+        doc.text(fmt(it.qty*it.rate), R-3, y, {align:'right'});
+        doc.setDrawColor(225,222,214); doc.setLineWidth(0.2); doc.line(M,y+3,R,y+3);
+        y+=9;
+      });
+      var t=compute(); y+=6;
+      function totline(lbl,val,bold){ doc.setFont('helvetica',bold?'bold':'normal'); doc.text(lbl,150,y,{align:'right'}); doc.text(val,R-3,y,{align:'right'}); y+=7; }
+      doc.setFontSize(10); doc.setTextColor(gray[0],gray[1],gray[2]);
+      totline('Subtotal', fmt(t.sub));
+      totline('Tax ('+t.taxRate+'%)', fmt(t.tax));
+      doc.setDrawColor(gold[0],gold[1],gold[2]); doc.setLineWidth(0.6); doc.line(120,y-3,R,y-3);
+      doc.setTextColor(ink[0],ink[1],ink[2]); doc.setFontSize(12); totline('TOTAL', fmt(t.total), true);
+      var notes=document.getElementById('invNotes').value;
+      if(notes){ y+=6; doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(150,150,150); doc.text('NOTES', M, y); y+=5;
+        doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(gray[0],gray[1],gray[2]); doc.text(doc.splitTextToSize(notes, R-M), M, y); }
+      doc.setFontSize(8.5); doc.setTextColor(150,150,150); doc.text('Thank you for your business.', M, 285);
+      return doc;
+    }
+    function persistSeq(){ var m=(document.getElementById('invNum').value||'').match(/\d+/); if(m){ try{ store.set('asg_invseq', m[0]); }catch(e){} } }
+
+    document.getElementById('dlInvoice').onclick=function(){
+      var doc=makePDF(); if(!doc) return;
+      doc.save((document.getElementById('invNum').value||'invoice')+'.pdf'); persistSeq();
+    };
+    document.getElementById('emailInvoice').onclick=function(){
+      var doc=makePDF(); if(!doc) return;
+      var num=document.getElementById('invNum').value||'invoice';
+      doc.save(num+'.pdf'); persistSeq();
+      var t=compute();
+      var subj=encodeURIComponent('Invoice '+num+' from '+settings.business);
+      var body=encodeURIComponent('Hi '+(document.getElementById('invClient').value||'there')+',\n\nPlease find attached invoice '+num+' for a total of '+fmt(t.total)+'.\n\n(The PDF just downloaded \u2014 attach it to this email before sending.)\n\nThank you,\n'+settings.business+'\n'+settings.phone);
+      window.location.href='mailto:'+(document.getElementById('invClientEmail').value||'')+'?subject='+subj+'&body='+body;
+    };
+  })();
+
 </script>
 </body>
 </html>
