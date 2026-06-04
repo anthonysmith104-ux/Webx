@@ -597,8 +597,8 @@
       if(on) v.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
     });
     navAs.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+id));
-    window.scrollTo(0,0);
-    if(history.replaceState) history.replaceState(null, '', '#'+id);
+    try{ window.scrollTo(0,0); }catch(e){}
+    try{ if(history.replaceState) history.replaceState(null, '', '#'+id); }catch(e){}
   }
   // any in-page link (nav, hero CTAs, footer, estimator) switches the view
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
