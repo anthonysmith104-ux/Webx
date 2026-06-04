@@ -269,6 +269,35 @@
        background:linear-gradient(transparent,rgba(13,13,14,.85));color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 
   .card .ic img.ic-logo{height:40px;width:auto;display:block}
+
+  /* careers / job posting */
+  .job{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px}
+  .job-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:4px}
+  .job-head h3{font-size:28px;text-transform:uppercase;letter-spacing:.02em;margin-top:10px}
+  .job-meta{display:flex;flex-direction:column;gap:5px;text-align:right;font-size:13px;color:var(--ink-soft)}
+  .job-meta span{white-space:nowrap}
+  .job>p{color:var(--ink-soft);font-size:15.5px;margin:14px 0 24px}
+  .job-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .job-cols h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--gold-deep);margin-bottom:12px}
+  .job-cols ul{list-style:none}
+  .job-cols li{position:relative;padding:6px 0 6px 20px;font-size:14.5px;color:var(--ink-soft)}
+  .job-cols li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+  @media(max-width:680px){.job-cols{grid-template-columns:1fr;gap:18px}.job-meta{text-align:left;flex-direction:row;flex-wrap:wrap;gap:4px 16px}}
+
+  /* owner: jobs + applications admin */
+  .admin-card select{width:100%;padding:11px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bone);font-family:'Hanken Grotesk';font-size:15px;color:var(--ink)}
+  .job-admin-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+  .job-admin-row b{font-family:'Cinzel';font-size:15px;display:block}
+  .job-admin-row span{font-size:12.5px;color:var(--ink-soft)}
+  .job-admin-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .job-admin-actions .btn{padding:7px 12px;font-size:11.5px}
+  .app-row{padding:14px 0;border-bottom:1px solid var(--line)}
+  .app-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .app-top b{font-size:15px}
+  .app-top span{font-size:12px;color:var(--ink-soft)}
+  .app-meta{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+  .app-contact{font-size:13px;margin-top:4px}
+  .app-msg{font-size:13px;color:var(--ink-soft);margin-top:6px;padding:8px 10px;background:var(--bone);border-radius:6px}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -504,6 +533,36 @@
   </div>
 </section>
 
+<section id="careers" class="view">
+  <div class="wrap" style="max-width:900px">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 40px">
+      <div class="rule center"></div>
+      <span class="eyebrow" style="justify-content:center;display:inline-flex">Careers</span>
+      <h2>We're hiring.</h2>
+      <p>Join a crew that takes pride in clean, lasting work. Current opening below.</p>
+    </div>
+
+    <div id="jobList"></div>
+
+    <div style="margin-top:54px;padding-top:48px;border-top:1px solid var(--line)">
+      <span class="eyebrow" style="display:inline-flex">Apply</span>
+      <h3 style="text-transform:uppercase;font-size:24px;margin-top:6px">Apply for this role</h3>
+    </div>
+    <div class="quote-form reveal" id="applyForm" style="margin-top:22px">
+      <div><label>Full name</label><input id="apName" placeholder="Jane Doe"><div class="err">Please enter your name.</div></div>
+      <div><label>Phone</label><input id="apPhone" placeholder="(651) 555-0100"><div class="err">Please enter a phone number.</div></div>
+      <div class="full"><label>Email</label><input id="apEmail" type="email" placeholder="you@email.com"><div class="err">Please enter a valid email.</div></div>
+      <div><label>Position</label><select id="apRole"><option>General Laborer</option></select></div>
+      <div><label>Experience</label><select id="apExp"><option>No experience &mdash; eager to learn</option><option>Less than 1 year</option><option>1&ndash;3 years</option><option>3&ndash;5 years</option><option>5+ years</option></select></div>
+      <div><label>Availability</label><select id="apAvail"><option>Immediately</option><option>Within 2 weeks</option><option>Within a month</option><option>Flexible</option></select></div>
+      <div><label>Reliable transportation?</label><select id="apTransport"><option>Yes</option><option>No</option></select></div>
+      <div class="full"><label>Anything else we should know? <span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-soft)">(optional)</span></label><textarea id="apMsg" placeholder="Tell us about yourself, relevant experience, references&hellip;"></textarea></div>
+      <div class="full"><button class="btn btn-primary" id="apSubmit" style="width:100%;justify-content:center;padding:16px">Submit application</button></div>
+      <div class="form-msg" id="apFormMsg"></div>
+    </div>
+  </div>
+</section>
+
 <section id="owner" class="view">
   <div class="wrap" style="max-width:1000px">
     <div id="ownerLogin">
@@ -531,6 +590,7 @@
       <div class="dash-tabs">
         <button class="dash-tab on" data-tab="settings">Site Settings</button>
         <button class="dash-tab" data-tab="invoice">Create Invoice</button>
+        <button class="dash-tab" data-tab="careers">Jobs &amp; Applicants</button>
       </div>
       <div class="dash-panel" id="tab-settings">
         <div class="admin-card">
@@ -571,6 +631,37 @@
           <p style="font-size:12px;color:var(--ink-soft);margin-top:12px">Email opens a draft with the PDF downloaded to attach. Auto-send with the file attached needs a backend (e.g., your Streamlit + an email service).</p>
         </div>
       </div>
+      <div class="dash-panel" id="tab-careers" style="display:none">
+        <div class="admin-card" style="margin-bottom:22px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <h3 style="text-transform:uppercase;font-size:18px">Job postings</h3>
+            <button class="btn btn-dark" id="jobNewBtn" style="padding:9px 16px;font-size:12px">+ New posting</button>
+          </div>
+          <div id="jobAdminList" style="margin-top:16px"></div>
+          <div id="jobEditor" style="display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)">
+            <input type="hidden" id="jobId">
+            <label>Title</label><input id="jobTitle" placeholder="General Laborer">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div><label>Employment type</label><select id="jobType"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Seasonal</option></select></div>
+              <div><label>Location</label><input id="jobLoc" placeholder="Twin Cities, MN"></div>
+            </div>
+            <label>Pay</label><input id="jobPay" placeholder="Competitive pay - DOE">
+            <label>Summary</label><textarea id="jobSummary" placeholder="Short description of the role"></textarea>
+            <label>Responsibilities (one per line)</label><textarea id="jobDuties" placeholder="Prep and protect job sites&#10;Assist painters and carpenters"></textarea>
+            <label>Requirements (one per line)</label><textarea id="jobReqs" placeholder="Reliable transportation&#10;Able to lift 50+ lbs"></textarea>
+            <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-weight:600"><input type="checkbox" id="jobOpen" checked style="width:auto"> Open / accepting applications</label>
+            <div style="display:flex;gap:10px;margin-top:16px">
+              <button class="btn btn-primary" id="jobSave">Save posting</button>
+              <button class="btn btn-ghost" id="jobCancel">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3 style="text-transform:uppercase;font-size:18px;margin-bottom:4px">Applications</h3>
+          <p style="color:var(--ink-soft);font-size:13px;margin-bottom:12px">Submitted through the Careers page.</p>
+          <div id="appAdminList"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -584,7 +675,7 @@
         <p style="margin-top:12px;color:rgba(246,241,231,.4)"><em>Placeholder contact &mdash; swap in real details.</em></p>
       </div>
       <div><h5>Explore</h5><ul><li><a href="#services">Services</a></li><li><a href="#work">Our Work</a></li><li><a href="#home">Reviews</a></li><li><a href="#estimate">Get an Estimate</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="#billing">Billing</a></li><li><a href="#quote">Book a Visit</a></li><li><a href="#quote">Request a Quote</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="#billing">Billing</a></li><li><a href="#quote">Book a Visit</a></li><li><a href="#quote">Request a Quote</a></li><li><a href="#careers">Careers</a></li></ul></div>
       <div><h5>Contact</h5><ul><li id="ftAddress">Twin Cities, Minnesota</li><li><a id="ftPhone" href="tel:+16515550100">(651) 555-0100</a></li><li><a id="ftEmail" href="mailto:hello@asgardconstruction.com">hello@asgardconstruction.com</a></li><li>Mon&ndash;Fri &middot; 7:30 AM&ndash;5 PM</li></ul></div>
     </div>
     <div class="foot-bottom">
@@ -677,6 +768,122 @@
     document.querySelectorAll('#slots .slot').forEach(x=>x.classList.remove('on')); pickedSlot=null;
   };
 
+  var apBtn=document.getElementById('apSubmit');
+  if(apBtn) apBtn.onclick=function(){
+    var name=document.getElementById('apName').value.trim();
+    var phone=document.getElementById('apPhone').value.trim();
+    var email=document.getElementById('apEmail').value.trim();
+    var e=false;
+    e=bad('apName',!name)||e;
+    e=bad('apPhone',!phone)||e;
+    e=bad('apEmail',!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))||e;
+    var msg=document.getElementById('apFormMsg');
+    if(e){msg.className='form-msg';msg.style.display='none';return;}
+    msg.className='form-msg ok';
+    var role=document.getElementById('apRole').value;
+    var apps=asgApps();
+    apps.unshift({ id:'a'+Date.now(), jobTitle:role, name:name, phone:phone, email:email,
+      experience:document.getElementById('apExp').value, availability:document.getElementById('apAvail').value,
+      transport:document.getElementById('apTransport').value, message:document.getElementById('apMsg').value,
+      createdAt:new Date().toLocaleString() });
+    asgSaveApps(apps);
+    msg.textContent='\u2713 Thanks, '+name+'! Your application for '+role+' was received. (Prototype \u2014 saved locally for the owner to review.)';
+    ['apName','apPhone','apEmail','apMsg'].forEach(function(i){document.getElementById(i).value='';});
+  };
+
+
+  /* ===================== JOBS + APPLICATIONS (shared) ===================== */
+  window.ASG_STORE = (function(){
+    try{ var k='__asg_t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
+      return { get:function(x){return localStorage.getItem(x);}, set:function(x,v){localStorage.setItem(x,v);} }; }
+    catch(e){ var m={}; return { get:function(x){return (x in m)?m[x]:null;}, set:function(x,v){m[x]=v;} }; }
+  })();
+  function esc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmtList(t){ return String(t||'').split('\n').map(function(x){return x.trim();}).filter(Boolean); }
+  function asgJobs(){ try{ return JSON.parse(window.ASG_STORE.get('asg_jobs')||'null'); }catch(e){ return null; } }
+  function asgSaveJobs(j){ try{ window.ASG_STORE.set('asg_jobs', JSON.stringify(j)); }catch(e){} }
+  function asgApps(){ try{ return JSON.parse(window.ASG_STORE.get('asg_apps')||'[]'); }catch(e){ return []; } }
+  function asgSaveApps(a){ try{ window.ASG_STORE.set('asg_apps', JSON.stringify(a)); }catch(e){} }
+  var ASG_DEFAULT_JOBS=[{ id:'job1', title:'General Laborer', type:'Full-time', location:'Twin Cities, MN', pay:'Competitive pay \u00b7 DOE',
+    summary:'We\'re looking for a dependable general laborer to support our painting, finishing, and remodeling crews on residential job sites across the Twin Cities. It\'s hands-on work with a team that will teach you the trade.',
+    duties:['Prep and protect job sites; move and stage materials','Assist painters and carpenters with daily tasks','Sanding, taping, cleanup, and haul-away','Keep tools and work areas organized and safe'],
+    reqs:['Reliable and on time, with a strong work ethic','Able to lift 50+ lbs and stay on your feet','Reliable transportation to job sites','Willing to learn \u2014 construction experience a plus'],
+    open:true }];
+  function asgGetJobs(){ var j=asgJobs(); if(!j||!j.length){ j=ASG_DEFAULT_JOBS.slice(); asgSaveJobs(j); } return j; }
+
+  function jobCardHTML(j){
+    return '<div class="job reveal in" style="margin-bottom:18px">'
+      +'<div class="job-head"><div><span class="badge">Now Hiring</span><h3>'+esc(j.title)+'</h3></div>'
+      +'<div class="job-meta"><span>'+esc(j.type)+'</span><span>'+esc(j.location)+'</span><span>'+esc(j.pay)+'</span></div></div>'
+      +(j.summary?'<p>'+esc(j.summary)+'</p>':'')
+      +'<div class="job-cols">'
+      +'<div><h4>What you\'ll do</h4><ul>'+(j.duties||[]).map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul></div>'
+      +'<div><h4>What we\'re looking for</h4><ul>'+(j.reqs||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></div>'
+      +'</div></div>';
+  }
+  function renderPublicJobs(){
+    var open=asgGetJobs().filter(function(j){return j.open;});
+    var list=document.getElementById('jobList');
+    if(list){ list.innerHTML = open.length ? open.map(jobCardHTML).join('') : '<p style="color:var(--ink-soft)">No open positions right now \u2014 check back soon.</p>'; }
+    var sel=document.getElementById('apRole');
+    if(sel){ var opts = open.length ? open.map(function(j){return j.title;}) : ['General inquiry']; sel.innerHTML=opts.map(function(t){return '<option>'+esc(t)+'</option>';}).join(''); }
+  }
+
+  function renderJobAdmin(){
+    var jobs=asgGetJobs(), box=document.getElementById('jobAdminList'); if(!box) return;
+    box.innerHTML = jobs.length ? jobs.map(function(j){
+      return '<div class="job-admin-row"><div><b>'+esc(j.title)+'</b><span>'+esc(j.type)+' \u00b7 '+esc(j.location)+(j.open?'':' \u00b7 closed')+'</span></div>'
+        +'<div class="job-admin-actions">'
+        +'<button class="btn btn-ghost" data-edit="'+j.id+'">Edit</button>'
+        +'<button class="btn btn-ghost" data-toggle="'+j.id+'">'+(j.open?'Close':'Reopen')+'</button>'
+        +'<button class="btn btn-ghost" data-del="'+j.id+'" style="color:#a8331f;border-color:#a8331f">Delete</button>'
+        +'</div></div>';
+    }).join('') : '<p style="color:var(--ink-soft);font-size:14px">No postings yet.</p>';
+    box.querySelectorAll('[data-edit]').forEach(function(b){ b.onclick=function(){ openJobEditor(b.getAttribute('data-edit')); }; });
+    box.querySelectorAll('[data-toggle]').forEach(function(b){ b.onclick=function(){ var id=b.getAttribute('data-toggle'),js=asgGetJobs(); js.forEach(function(j){ if(j.id===id) j.open=!j.open; }); asgSaveJobs(js); renderJobAdmin(); renderPublicJobs(); }; });
+    box.querySelectorAll('[data-del]').forEach(function(b){ b.onclick=function(){ if(!confirm('Delete this posting?')) return; var id=b.getAttribute('data-del'); asgSaveJobs(asgGetJobs().filter(function(j){return j.id!==id;})); renderJobAdmin(); renderPublicJobs(); }; });
+  }
+  function openJobEditor(id){
+    var ed=document.getElementById('jobEditor'); if(!ed) return; ed.style.display='block';
+    var j=id?asgGetJobs().filter(function(x){return x.id===id;})[0]:null;
+    document.getElementById('jobId').value=j?j.id:'';
+    document.getElementById('jobTitle').value=j?j.title:'';
+    document.getElementById('jobType').value=j?j.type:'Full-time';
+    document.getElementById('jobLoc').value=j?j.location:'Twin Cities, MN';
+    document.getElementById('jobPay').value=j?j.pay:'Competitive pay \u00b7 DOE';
+    document.getElementById('jobSummary').value=j?j.summary:'';
+    document.getElementById('jobDuties').value=j?(j.duties||[]).join('\n'):'';
+    document.getElementById('jobReqs').value=j?(j.reqs||[]).join('\n'):'';
+    document.getElementById('jobOpen').checked=j?!!j.open:true;
+    ed.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function renderAppAdmin(){
+    var apps=asgApps(), box=document.getElementById('appAdminList'); if(!box) return;
+    box.innerHTML = apps.length ? apps.map(function(a){
+      return '<div class="app-row"><div class="app-top"><b>'+esc(a.name)+'</b><span>'+esc(a.createdAt||'')+'</span></div>'
+        +'<div class="app-meta">'+esc(a.jobTitle)+' \u00b7 '+esc(a.experience)+' \u00b7 avail: '+esc(a.availability)+' \u00b7 transport: '+esc(a.transport)+'</div>'
+        +'<div class="app-contact"><a href="mailto:'+esc(a.email)+'">'+esc(a.email)+'</a> \u00b7 '+esc(a.phone)+'</div>'
+        +(a.message?'<div class="app-msg">'+esc(a.message)+'</div>':'')
+        +'<button class="btn btn-ghost" data-del="'+a.id+'" style="color:#a8331f;border-color:#a8331f;padding:6px 12px;font-size:12px;margin-top:8px">Delete</button></div>';
+    }).join('') : '<p style="color:var(--ink-soft);font-size:14px">No applications yet.</p>';
+    box.querySelectorAll('[data-del]').forEach(function(b){ b.onclick=function(){ var id=b.getAttribute('data-del'); asgSaveApps(asgApps().filter(function(a){return a.id!==id;})); renderAppAdmin(); }; });
+  }
+  (function(){
+    var nb=document.getElementById('jobNewBtn'); if(nb) nb.onclick=function(){ openJobEditor(''); };
+    var jc=document.getElementById('jobCancel'); if(jc) jc.onclick=function(){ document.getElementById('jobEditor').style.display='none'; };
+    var js=document.getElementById('jobSave'); if(js) js.onclick=function(){
+      var id=document.getElementById('jobId').value, jobs=asgGetJobs();
+      var rec={ id:id||('job'+Date.now()), title:document.getElementById('jobTitle').value.trim()||'Untitled role',
+        type:document.getElementById('jobType').value, location:document.getElementById('jobLoc').value.trim(),
+        pay:document.getElementById('jobPay').value.trim(), summary:document.getElementById('jobSummary').value.trim(),
+        duties:fmtList(document.getElementById('jobDuties').value), reqs:fmtList(document.getElementById('jobReqs').value),
+        open:document.getElementById('jobOpen').checked };
+      if(id){ jobs=jobs.map(function(j){return j.id===id?rec:j;}); } else { jobs.push(rec); }
+      asgSaveJobs(jobs); document.getElementById('jobEditor').style.display='none'; renderJobAdmin(); renderPublicJobs();
+    };
+  })();
+  renderPublicJobs();
+
   /* global, inline-wired sign in/out so it never depends on later script binding */
   function asgSignIn(){
     var p=(document.getElementById('ownPass').value||'').trim().toLowerCase();
@@ -698,11 +905,7 @@
   /* ===================== OWNER PORTAL ===================== */
   (function(){
     // storage that persists when self-hosted, falls back to memory in sandboxed previews
-    var store = (function(){
-      try{ var k='__asg_t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
-        return { get:function(x){return localStorage.getItem(x);}, set:function(x,v){localStorage.setItem(x,v);} }; }
-      catch(e){ var m={}; return { get:function(x){return (x in m)?m[x]:null;}, set:function(x,v){m[x]=v;} }; }
-    })();
+    var store = window.ASG_STORE;
 
     var settings = { business:'Asgard Construction LLC', phone:'(651) 555-0100',
                      email:'hello@asgardconstruction.com', address:'Twin Cities, Minnesota' };
@@ -726,8 +929,8 @@
       t.onclick=function(){
         document.querySelectorAll('.dash-tab').forEach(function(x){x.classList.remove('on');});
         t.classList.add('on');
-        document.getElementById('tab-settings').style.display=(t.dataset.tab==='settings')?'block':'none';
-        document.getElementById('tab-invoice').style.display=(t.dataset.tab==='invoice')?'block':'none';
+        ['settings','invoice','careers'].forEach(function(k){ var el=document.getElementById('tab-'+k); if(el) el.style.display=(t.dataset.tab===k)?'block':'none'; });
+        if(t.dataset.tab==='careers'){ renderJobAdmin(); renderAppAdmin(); }
       };
     });
 
